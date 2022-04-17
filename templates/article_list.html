@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+</head>
+<body>
+{% extends 'base.html' %}
+{% block content %}
+<div class="card" style="margin: 5px 200px">
+    {% for article in object_list %}
+            <div class="card-header">
+                <span class="font-weight-bold"><a href="{% url 'article_detail' article.pk %}"><h2>{{article.title}}</h2></a></span>
+            </div>
+            {% if article.photo %}
+                <img class="card-img-top" src="{{article.photo.url}}" alt="{{article.title}}">
+            {% endif %}
+            <div class="card-body">
+                {{article.summary}}... <a href="{% url 'article_detail' article.pk %}">Batafsil</a>
+            </div>
+            <div class="card-footer text-left text-muted">
+                <span class="text-muted">muallif {{article.author | title}} {{article.date}}</span>
+            </div>
+            <br>
+    {% endfor %}
+        </div>
+
+{% endblock content %}
+</body>
+</html>
